@@ -22,11 +22,4 @@ if __name__ == '__main__':
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
-    # def instantiate_from_csv():
-    #     with open('items.csv', newline='') as csvfile:
-    #         reader = csv.DictReader(csvfile)
-    #         for row in reader:
-    #             print(row['name'], row['price'], row['quantity'])
-    #
-    #
-    # instantiate_from_csv()
+
