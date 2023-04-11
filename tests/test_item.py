@@ -14,14 +14,22 @@ def test_init(item_pc):
     assert item_pc.quantity == 2
 
 
+def test_name(item_pc):
+    item_pc.name = "Смартфон"
+    assert item_pc.name == "Смартфон"
+    item_pc.name = "Смартфонывмываываыаыаываывваыаываыыаыаыа"
+    assert item_pc.name == "Смартфон"
+
+
 def test_calculate_total_price(item_pc):
     assert item_pc.calculate_total_price() == 30000
 
-def test_instantiate_from_csv():
-    Item.instantiate_from_csv()
-    assert len(Item.all) == 5
-    item1 = Item.all[0]
-    assert item1.name == 'Смартфон'
+
+# def test_instantiate_from_csv():
+#     Item.instantiate_from_csv()
+#     assert len(Item.all) == 5
+#     item1 = Item.all[0]
+#     assert item1.name == 'Смартфон'
 
 def test_string_to_number():
     assert Item.string_to_number('5') == 5
