@@ -24,6 +24,7 @@ def test_calculate_total_price(item_pc):
 
 
 def test_instantiate_from_csv():
+    Item.all = []
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
     item1 = Item.all[0]
