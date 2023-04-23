@@ -8,6 +8,11 @@ def item_pc():
     return Item("ПК", 15000, 2)
 
 
+@pytest.fixture()
+def item_tablet():
+    return Item("Планшет", 10000, 3)
+
+
 def test_init(item_pc):
     assert item_pc.name == "ПК"
     assert item_pc.price == 15000
@@ -43,3 +48,10 @@ def test_repr(item_pc):
 
 def test_str(item_pc):
     assert str(item_pc) == 'ПК'
+
+
+def test_add(item_pc, item_tablet):
+    assert item_pc + item_tablet == 5
+    with pytest.raises(ValueError, match=r"Складывать можно только объекты Item и дочерние от них."):
+        item_pc + 5
+
