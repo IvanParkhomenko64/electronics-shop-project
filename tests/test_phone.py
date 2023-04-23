@@ -17,6 +17,8 @@ def test_init(phone_ip):
 def test_number_of_sim(phone_ip):
     phone_ip.number_of_sim = 1
     assert phone_ip.number_of_sim == 1
+    with pytest.raises(ValueError, match=r"Количество физических SIM-карт должно быть целым числом больше нуля."):
+        phone_ip.number_of_sim = 0
 
 
 def test_repr(phone_ip):
