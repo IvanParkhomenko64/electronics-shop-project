@@ -12,6 +12,7 @@ class Item:
         """
         Создание экземпляра класса item.
         """
+        super().__init__()
         self.__name = name
         self.price = price
         self.quantity = quantity
