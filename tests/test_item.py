@@ -1,5 +1,5 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 import pytest
 
 
@@ -30,10 +30,17 @@ def test_calculate_total_price(item_pc):
 
 def test_instantiate_from_csv():
     Item.all = []
+    Item.source = '../src/items.csv'
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
     item1 = Item.all[0]
     assert item1.name == "Смартфон"
+
+    Item.all = []
+    with pytest.raises(InstantiateCSVError) as excinfo:
+        Item.source = '../src/items_.csv'
+        Item.instantiate_from_csv()
+    assert "Файл item.csv поврежден" in str(excinfo.value)
 
 
 def test_string_to_number():
@@ -54,4 +61,3 @@ def test_add(item_pc, item_tablet):
     assert item_pc + item_tablet == 5
     with pytest.raises(ValueError, match=r"Складывать можно только объекты Item и дочерние от них."):
         item_pc + 5
-

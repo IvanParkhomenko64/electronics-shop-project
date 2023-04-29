@@ -5,6 +5,9 @@ class InstantiateCSVError(Exception):
     def __init__(self, *args, **kwargs):
         self.message = args[0] if args else '_Файл item.csv поврежден_'
 
+    def __str__(self):
+        return f'{self.__class__.__name__}: Файл item.csv поврежден'
+
 
 class Item:
     """
@@ -12,6 +15,7 @@ class Item:
     """
     pay_rate = 0.85
     all = []
+    source = '../src/items_.csv'
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -55,20 +59,20 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         try:
-            with open('../src/items.csv', newline='') as csvfile:
+            with open(Item.source, newline='') as csvfile:
                 reader = csv.DictReader(csvfile)
         except FileNotFoundError:
-            print("_Отсутствует файл item.csv_")
+            print("FileNotFoundError: Отсутствует файл item.csv")
         else:
             try:
-                with open('../src/items.csv', newline='') as csvfile:
+                with open(Item.source, newline='') as csvfile:
                     reader = csv.DictReader(csvfile)
                     if len(reader.fieldnames) != 3:
                         raise InstantiateCSVError
-            except InstantiateCSVError:
-                print('Файл item.csv поврежден')
+            except InstantiateCSVError as a:
+                print(a)
             else:
-                with open('../src/items.csv', newline='') as csvfile:
+                with open(Item.source, newline='') as csvfile:
                     reader = csv.DictReader(csvfile)
                     for row in reader:
                         cls(row['name'], row['price'], row['quantity'])
