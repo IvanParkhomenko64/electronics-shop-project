@@ -15,7 +15,7 @@ class Item:
     """
     pay_rate = 0.85
     all = []
-    source = '../src/items_.csv'
+    source = '../src/items.csv'
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -69,8 +69,8 @@ class Item:
                     reader = csv.DictReader(csvfile)
                     if len(reader.fieldnames) != 3:
                         raise InstantiateCSVError
-            except InstantiateCSVError as a:
-                print(a)
+            except InstantiateCSVError:
+                print('InstantiateCSVError: Файл item.csv поврежден')
             else:
                 with open(Item.source, newline='') as csvfile:
                     reader = csv.DictReader(csvfile)

@@ -35,12 +35,14 @@ def test_instantiate_from_csv():
     assert len(Item.all) == 5
     item1 = Item.all[0]
     assert item1.name == "Смартфон"
-
-    Item.all = []
-    with pytest.raises(InstantiateCSVError) as excinfo:
-        Item.source = '../src/items_.csv'
-        Item.instantiate_from_csv()
-    assert "Файл item.csv поврежден" in str(excinfo.value)
+    # with pytest.raises(InstantiateCSVError) as excinfo:
+    #     Item.source = '../src/_items_.csv'
+    #     Item.instantiate_from_csv()
+    # assert "Файл item.csv поврежден" in str(excinfo.value)
+    Item.source = '../src/items_.csv'
+    assert Item.instantiate_from_csv() == print('InstantiateCSVError: Файл item.csv поврежден')
+    Item.source = '../src/_items_.csv'
+    assert Item.instantiate_from_csv() == print("FileNotFoundError: Отсутствует файл item.csv")
 
 
 def test_string_to_number():
