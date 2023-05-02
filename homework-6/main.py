@@ -3,7 +3,7 @@ import csv
 
 
 if __name__ == '__main__':
-    Item.source = '../src/_items_.csv'
+    Item.source = '../src/items.csv'
     # Файл items.csv отсутствует.
     Item.instantiate_from_csv()
     # FileNotFoundError: Отсутствует файл item.csv
